@@ -23,10 +23,82 @@ To read more about using these font, please visit the Next.js documentation:
 - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import React, { useState, useRef } from 'react';
+import axios from 'axios';
 
-export function landing() {
+const Landing: React.FC = () => {
+  // Add these state and ref declarations
+  const [isRecording, setIsRecording] = useState(false);
+  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
+
+  // Implement the recording functions
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      mediaRecorderRef.current = mediaRecorder;
+      audioChunksRef.current = [];
+
+      mediaRecorder.ondataavailable = (event) => {
+        audioChunksRef.current.push(event.data);
+      };
+
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
+        setAudioBlob(audioBlob);
+        sendAudioToAPI(audioBlob);
+      };
+
+      mediaRecorder.start();
+      setIsRecording(true);
+    } catch (error) {
+      console.error('Error accessing microphone:', error);
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+    }
+  };
+
+  const sendAudioToAPI = async (audioBlob: Blob) => {
+    try {
+      const formData = new FormData();
+      formData.append('audio', audioBlob, 'recorded_audio.wav');
+
+      const response = await axios.post('YOUR_API_ENDPOINT', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
+      // Assuming the API returns an audio file URL
+      const responseAudioUrl = response.data.audioUrl;
+      playResponseAudio(responseAudioUrl);
+    } catch (error) {
+      console.error('Error sending audio to API:', error);
+    }
+  };
+
+  const playResponseAudio = (audioUrl: string) => {
+    const audio = new Audio(audioUrl);
+    audio.play();
+  };
+
+  // Add this handler for your existing button
+  const handleRecordClick = () => {
+    if (isRecording) {
+      stopRecording();
+    } else {
+      startRecording();
+    }
+  };
+
   return (
     <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-[#ffedf9] text-foreground">
       <header className="absolute top-6 left-1/2 -translate-x-1/2">
@@ -44,15 +116,18 @@ export function landing() {
           let us provide personalized support and resources.
         </p>
         <div className="mt-8 flex justify-center items-center gap-2">
-          <Button variant="outline" size="lg" className="bg-[#06B0B9] text-primary-foreground">
+          <Button onClick={handleRecordClick} variant="outline" size="lg" className="bg-[#06B0B9] text-primary-foreground">
+            {isRecording ? 'Stop Recording' : 'Start Recording'}
             <MicIcon className="h-6 w-6" />
             Start Recording
           </Button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default Landing;
 
 function MicIcon(props) {
   return (
