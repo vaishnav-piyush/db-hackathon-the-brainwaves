@@ -1,6 +1,8 @@
-name: Example - Deploy App Engine using gcloud
+name: Deploy App Engine using gcloud
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   example:
@@ -14,8 +16,6 @@ jobs:
       # actions/checkout MUST come before auth
       - name: 'Checkout'
         uses: 'actions/checkout@v3'
-        with:
-          repository: GoogleCloudPlatform/python-docs-samples # Taken from https://cloud.google.com/appengine/docs/standard/python3/building-app
 
       - name: 'Authenticate to GCP as Infrastructure SA for deployment'
         uses: 'google-github-actions/auth@v1'
@@ -28,17 +28,12 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v1'
 
-      # Only needed for first run
-      - name: 'Create App Environment'
-        run: 'gcloud app create --region=europe-west3 --service-account="${{ vars.WORKLOAD_SA_EMAIL }}"'
-
       - name: 'Deploy App Engine'
         id: deploy
         run: |
           set -e
           
-          cd "appengine/standard_python3/building-an-app/building-an-app-1"
-          gcloud app deploy --service-account="${{ vars.WORKLOAD_SA_EMAIL }}"
+          gcloud app deploy backend/app.yaml --service-account="${{ vars.WORKLOAD_SA_EMAIL }}"
           
           url=$(gcloud app describe --format="value(defaultHostname)")
           echo "url=${url}" >> "${GITHUB_OUTPUT}"
