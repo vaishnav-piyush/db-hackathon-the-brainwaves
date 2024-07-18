@@ -1,4 +1,7 @@
 from flask import Flask, jsonify
+from google.cloud import storage
+from flask_cors import CORS
+from speech_to_text import speech_to_text, return_transcript, print_response
 
 app = Flask(__name__)
 
@@ -19,9 +22,7 @@ if __name__ == '__main__':
 
 
 # from flask import Flask, request, jsonify
-# from google.cloud import storage
-# from flask_cors import CORS
-# from speech_to_text import speech_to_text, return_transcript, print_response
+
 #
 # app = Flask(__name__)
 # CORS(app)  # Enable CORS for all routes
