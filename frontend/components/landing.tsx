@@ -24,6 +24,8 @@ To read more about using these font, please visit the Next.js documentation:
 - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
 **/
 
+'use client';
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import React, { useState, useRef } from 'react';
