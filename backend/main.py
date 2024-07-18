@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from google.cloud import storage
 from flask_cors import CORS
 from speech_to_text import speech_to_text, return_transcript, print_response
