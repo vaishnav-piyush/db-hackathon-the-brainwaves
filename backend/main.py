@@ -13,7 +13,7 @@ def hello_world():
 
 # Initialize Google Cloud Storage client
 storage_client = storage.Client()
-bucket_name = 'staging.hack-team-the-brainwaves.appspot.com'  # Replace with your bucket name
+bucket_name = 'staging.hack-team-the-brainwaves.appspot.com'
 
 @app.route('/upload', methods=['POST'])
 def upload():
