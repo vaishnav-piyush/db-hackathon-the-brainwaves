@@ -75,17 +75,43 @@ const Landing: React.FC = () => {
       const formData = new FormData();
       formData.append('audio', audioBlob, 'recorded_audio.wav');
 
-      const response = await axios.post('YOUR_API_ENDPOINT', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
+      const response = await axios.post('http://127.0.0.1:8080/upload', formData, {
+        headers: { 
+          'Content-Type': 'multipart/form-data'
+        },
       });
 
       // Assuming the API returns an audio file URL
       const responseAudioUrl = response.data.audioUrl;
-      playResponseAudio(responseAudioUrl);
+      // playResponseAudio(responseAudioUrl);
     } catch (error) {
       console.error('Error sending audio to API:', error);
     }
   };
+
+  const saveAudioLocally = async (audioBlob: Blob) => {
+    try {
+      // Convert Blob to File
+      const file = new File([audioBlob], 'recorded_audio.wav', { type: 'audio/wav' });
+
+      // Use the File System Access API to save the file
+      const fileHandle = await window.showSaveFilePicker({
+        suggestedName: 'recorded_audio.wav',
+        types: [{
+          description: 'WAV Audio File',
+          accept: { 'audio/wav': ['.wav'] },
+        }],
+      });
+
+      const writable = await fileHandle.createWritable();
+      await writable.write(file);
+      await writable.close();
+
+      console.log('Audio file saved successfully');
+    } catch (error) {
+      console.error('Error saving audio file:', error);
+    }
+  }
 
   const pa = (audioUrl: string) => {
     const audio = new Audio(audioUrl);
