@@ -87,7 +87,7 @@ const Landing: React.FC = () => {
     }
   };
 
-  const playResponseAudio = (audioUrl: string) => {
+  const pa = (audioUrl: string) => {
     const audio = new Audio(audioUrl);
     audio.play();
   };
@@ -95,8 +95,10 @@ const Landing: React.FC = () => {
   // Add this handler for your existing button
   const handleRecordClick = () => {
     if (isRecording) {
+      console.log("stopping!!");
       stopRecording();
     } else {
+      console.log("starting!!");
       startRecording();
     }
   };
@@ -121,7 +123,6 @@ const Landing: React.FC = () => {
           <Button onClick={handleRecordClick} variant="outline" size="lg" className="bg-[#06B0B9] text-primary-foreground">
             {isRecording ? 'Stop Recording' : 'Start Recording'}
             <MicIcon className="h-6 w-6" />
-            Start Recording
           </Button>
         </div>
       </div>
