@@ -7,32 +7,48 @@
 
 ## Contents
 
-1. [About your hackathon environment](#about-your-hackathon-environment)
-2. [Initial Login](#initial-login)
-3. [Access Issues](#access-issues)
-4. [GCP](#gcp)
+1. [Goodbye](#goodbye)
+2. [About your hackathon environment](#about-your-hackathon-environment)
+3. [Initial Login](#initial-login)
+4. [Access Issues](#access-issues)
+5. [GCP](#gcp)
     1. [First log-in](#first-log-in)
     2. [Access Rights & Principals](#access-rights--principals)
     3. [Use a custom/user-managed Service Account wherever possible](#use-a-customuser-managed-service-account-wherever-possible)
     4. [Limitations & Restrictions](#limitations--restrictions)
     5. [Developing in Google Cloud Console & Cloud Shell](#developing-in-google-cloud-console--cloud-shell)
     6. [GCP Example Apps](#gcp-example-apps)
-5. [GitHub](#github)
+6. [GitHub](#github)
     1. [Limitations & Restrictions](#limitations--restrictions-1)
-6. [Terraform Cloud](#terraform-cloud)
-7. [OpenShift](#openshift)
-8. [Azure](#azure)
-9. [Hackathon Use Cases](#hackathon-use-cases)
-10. [Hackathon DataSets](#hackathon-datasets)
-11. [Code and Setup Tutorials](#code-and-setup-tutorials)
-12. [Additional useful guides](#additional-useful-guides-)
-13. [FAQ](#faq)
+7. [Terraform Cloud](#terraform-cloud)
+8. [OpenShift](#openshift)
+9. [Azure](#azure)
+10. [Hackathon Use Cases](#hackathon-use-cases)
+11. [Hackathon DataSets](#hackathon-datasets)
+12. [Code and Setup Tutorials](#code-and-setup-tutorials)
+13. [Additional useful guides](#additional-useful-guides-)
+14. [FAQ](#faq)
     1. [Authenticating with GCP APIs from code](#authenticating-with-gcp-apis-from-code)
     2. [How do I deploy Cloud Run?](#how-do-i-deploy-cloud-run)
     3. [How do I deploy App Engine?](#how-do-i-deploy-app-engine)
     4. [How do I deploy Cloud Functions?](#how-do-i-deploy-cloud-functions)
     5. [How do I get Support](#teams-support-channels)
     6. [How to I Login to Teams](#teams-support-channels)
+
+## [Goodbye!](https://www.youtube.com/watch?v=Qy9_lfjQopU)
+On behalf of the hackathon organisers, a massove "thank you" to all participants for your enthusiam, patience and 
+contributions to this year's hackathon.
+We also wish to sincerely thank our vendor partners, Google, Microsoft, Hashicorp, GitHub and RedHat, without whom we 
+could not offer such a rich experience.
+
+For the Cloud Platform team, this is inarguably the highlight of our working calendar.
+
+You will have **two hours from the end of the closing ceremony** to export anything from GCP that you wish to retain. 
+After this time we will deactivate the billing link on your project and **all of your resources will instantly be torn
+down**.
+
+Your GitHub repository will remain available until the end of the day on **22nd July**. 
+If you wish to retain its contents, please clone it before this time.
 
 ## About your hackathon environment
 
