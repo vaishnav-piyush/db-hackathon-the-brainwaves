@@ -36,7 +36,7 @@
     6. [How to I Login to Teams](#teams-support-channels)
 
 ## [Goodbye!](https://www.youtube.com/watch?v=Qy9_lfjQopU)
-On behalf of the hackathon organisers, a massove "thank you" to all participants for your enthusiam, patience and 
+On behalf of the hackathon organisers, a massive "thank you" to all participants for your enthusiasm, patience and 
 contributions to this year's hackathon.
 We also wish to sincerely thank our vendor partners, Google, Microsoft, Hashicorp, GitHub and RedHat, without whom we 
 could not offer such a rich experience.
