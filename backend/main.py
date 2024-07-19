@@ -67,8 +67,14 @@ def careplan():
     # Print the extracted JSON object
     if json_obj:
         print(json.dumps(json_obj, indent=4))
-        cache['data'] = ''
+    cache['data'] = ''
     return jsonify(json_obj), 200
+
+@app.route('/refresh', methods=['GET'])
+def refresh():
+    print("Cache Nullified")
+    cache['data'] = ''
+    return jsonify({"success": True}), 200
 
 def extract_json(text):
     # Regular expression to find JSON object
