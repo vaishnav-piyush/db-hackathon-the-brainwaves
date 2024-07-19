@@ -20,7 +20,7 @@ def hello_world():
 # Initialize Google Cloud Storage client
 storage_client = storage.Client()
 bucket_name = 'staging.hack-team-the-brainwaves.appspot.com'  # Replace with your bucket name
-cache = TTLCache(maxsize=100, ttl=timedelta(hours=12), timer=datetime.now)
+cache = TTLCache(maxsize=8, ttl=timedelta(hours=12), timer=datetime.now)
 cache['data'] = ''
 
 
@@ -46,7 +46,7 @@ def upload():
     # print_response(response)
     transcript = return_transcript(response)
 
-    cache['data'] = cache['data'] + '\\n' + transcript
+    cache['data'] = cache['data'] + '\\n' + transcript + '\\n' + "Please respond in less than 100 characters."
 
     print(cache['data'])
 
@@ -60,7 +60,7 @@ def upload():
 
 @app.route('/careplan', methods=['GET'])
 def careplan():
-    question = "Based on this patient data, can you give me a personalised careplan? Can you format the response as a Json with two categories 'Nutrition' and 'Physical Exercise'"
+    question = "Based on this patient data, can you give me a personalised detailed careplan? Can you format the response as a Json with two categories 'Nutrition' and 'Physical Exercise'"
     cache['data'] = cache['data'] + "\\n" + question
     response = chat_with_openai(cache['data'])
     json_obj = extract_json(response)
@@ -72,8 +72,10 @@ def careplan():
 
 @app.route('/refresh', methods=['GET'])
 def refresh():
+    print("Before: " + cache['data'])
     print("Cache Nullified")
     cache['data'] = ''
+    print("After: " + cache['data'])
     return jsonify({"success": True}), 200
 
 def extract_json(text):
