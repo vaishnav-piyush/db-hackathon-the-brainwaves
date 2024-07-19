@@ -9,9 +9,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+import styles from './careplan.module.css'
 
 export default function Careplan() {
   return (
+    <div className={styles.careContainer}>
     <div className="flex min-h-screen">
       <aside className="w-64 bg-white border-r">
         <div className="p-4">
@@ -161,6 +163,7 @@ export default function Careplan() {
           </Card>
         </section>
       </main>
+      </div>
     </div>
   )
 }

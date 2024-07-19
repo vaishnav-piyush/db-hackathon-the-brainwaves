@@ -40,6 +40,7 @@ const Landing: React.FC = () => {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [apiResponse, setApiResponse] = useState<string>('');
 
   const questions = [
     'Hello, tell me about yourself',
@@ -49,14 +50,27 @@ const Landing: React.FC = () => {
   ];
 
   useEffect(() => {
+      const fetchData = async () => {
+        try {
+          await axios.get('https://care-triangle-backend-dot-hack-team-the-brainwaves.nw.r.appspot.com/refresh');
+          console.log('Cache refreshed successfully');
+        } catch (error) {
+          console.error('Error refreshing cache:', error);
+        }
+      };
+
+      fetchData();
+    }, []);
+
+  useEffect(() => {
     if (currentQuestion >= questions.length) {
       // Reroute to another page when the last question is asked
       window.location.href = '/dashboard';
     }
   }, [currentQuestion, questions.length]);
 
-  // Implement the recording functions
   const startRecording = async () => {
+    setApiResponse(''); // Clear previous response
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const mediaRecorder = new MediaRecorder(stream);
@@ -67,16 +81,36 @@ const Landing: React.FC = () => {
         audioChunksRef.current.push(event.data);
       };
 
-      mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
-        setAudioBlob(audioBlob);
-        sendAudioToAPI(audioBlob);
-      };
+      // Create a promise that resolves when the API call is complete
+      const apiCallComplete = new Promise<void>((resolve) => {
+        mediaRecorder.onstop = async () => {
+          const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
+          setAudioBlob(audioBlob);
+          await sendAudioToAPI(audioBlob);
+          resolve();
+        };
+      });
 
       mediaRecorder.start();
       setIsRecording(true);
+
+      // Stop the recording after 5 seconds (adjust as needed)
+      setTimeout(() => {
+        if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
+          mediaRecorderRef.current.stop();
+          setIsRecording(false);
+        }
+      }, 5000);
+
+      // Wait for the API call to complete
+      await apiCallComplete;
+
+      // Move to the next question
+      setCurrentQuestion(prevQuestion => prevQuestion + 1);
+
     } catch (error) {
-      console.error('Error accessing microphone:', error);
+      console.error('Error in recording process:', error);
+      setApiResponse('Error occurred during the recording process.');
     }
   };
 
@@ -102,10 +136,25 @@ const Landing: React.FC = () => {
         },
       });
 
-      // Assuming the API returns an audio file URL
-      const responseAudioUrl = response.data.audioUrl;
+      // Log the entire response for debugging
+      console.log("Full API response:", response.data);
+
+      // Check if the response has data and an "answer" key
+      if (response.data && response.data.answer) {
+        console.log("API answer:", response.data.answer);
+        setApiResponse(response.data.answer);
+      } else {
+        console.error("Unexpected API response format");
+        setApiResponse('Unexpected response from the server.');
+      }
+
+      // Return the response in case you need to use it elsewhere
+      return response.data;
+
     } catch (error) {
       console.error('Error sending audio to API:', error);
+      setApiResponse('Error occurred while processing the audio.');
+      throw error; // Re-throw the error to be handled by the caller if needed
     }
   };
 
@@ -138,11 +187,16 @@ const Landing: React.FC = () => {
           We are here to help you navigate the challenges of caring for a loved one with dementia. Share your story and
           let us provide personalized support and resources.
         </p>
-        <div className="mt-8 flex justify-center items-center gap-2">
+        <div className="mt-8 flex flex-col justify-center items-center gap-4">
           <Button onClick={handleRecordClick} variant="outline" size="lg" className="bg-[#06B0B9] text-primary-foreground">
             {isRecording ? 'Stop Recording' : 'Start Recording'}
             <MicIcon className="h-6 w-6" />
           </Button>
+          {apiResponse && (
+            <div className="mt-4 p-4 bg-white rounded-lg shadow-md">
+              <p className="text-lg">{apiResponse}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
