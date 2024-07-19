@@ -4,6 +4,9 @@ from flask_cors import CORS
 from speech_to_text import speech_to_text, return_transcript
 from cachetools import TTLCache
 from openai import chat_with_openai
+import re
+import json
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -17,7 +20,7 @@ def hello_world():
 # Initialize Google Cloud Storage client
 storage_client = storage.Client()
 bucket_name = 'staging.hack-team-the-brainwaves.appspot.com'  # Replace with your bucket name
-cache = TTLCache(maxsize=100, ttl=60)
+cache = TTLCache(maxsize=100, ttl=timedelta(hours=12), timer=datetime.now)
 cache['data'] = ''
 
 
@@ -57,12 +60,32 @@ def upload():
 
 @app.route('/careplan', methods=['GET'])
 def careplan():
-    question = "Based on this patient data, can you give me a personalised careplan? Can you format the response as a Json with two attributes 'Nutrition' and ''"
+    question = "Based on this patient data, can you give me a personalised careplan? Can you format the response as a Json with two categories 'Nutrition' and 'Physical Exercise'"
     cache['data'] = cache['data'] + "\\n" + question
     response = chat_with_openai(cache['data'])
-    print(response)
-    return jsonify({"success": True, "careplan": response}), 200
+    json_obj = extract_json(response)
+    # Print the extracted JSON object
+    if json_obj:
+        print(json.dumps(json_obj, indent=4))
+        cache['data'] = ''
+    return jsonify(json_obj), 200
 
+def extract_json(text):
+    # Regular expression to find JSON object
+    json_regex = re.compile(r'\{.*\}', re.DOTALL)
+
+    match = json_regex.search(text)
+    if match:
+        json_str = match.group()
+        try:
+            json_obj = json.loads(json_str)
+            return json_obj
+        except json.JSONDecodeError as e:
+            print(f"Error decoding JSON: {e}")
+            return None
+    else:
+        print("No JSON object found in the text.")
+        return None
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
