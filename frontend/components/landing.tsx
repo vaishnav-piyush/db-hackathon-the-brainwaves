@@ -117,30 +117,6 @@ const Landing: React.FC = () => {
     }
   };
 
-//   const saveAudioLocally = async (audioBlob: Blob) => {
-//     try {
-//       // Convert Blob to File
-//       const file = new File([audioBlob], 'recorded_audio.wav', { type: 'audio/wav' });
-//
-//       // Use the File System Access API to save the file
-//       const fileHandle = await window.showSaveFilePicker({
-//         suggestedName: 'recorded_audio.wav',
-//         types: [{
-//           description: 'WAV Audio File',
-//           accept: { 'audio/wav': ['.wav'] },
-//         }],
-//       });
-//
-//       const writable = await fileHandle.createWritable();
-//       await writable.write(file);
-//       await writable.close();
-//
-//       console.log('Audio file saved successfully');
-//     } catch (error) {
-//       console.error('Error saving audio file:', error);
-//     }
-//   }
-
   const pa = (audioUrl: string) => {
     const audio = new Audio(audioUrl);
     audio.play();
@@ -149,10 +125,10 @@ const Landing: React.FC = () => {
   return (
     <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-[#ffedf9] text-foreground">
       <header className="absolute top-6 left-1/2 -translate-x-1/2">
-        {/* <Link href="#" prefetch={false}>
-          <Image src={MyImage} alt="done"/>
-          <span className="sr-only">MyImage</span>
-        </Link> */}
+        <Link href="#" prefetch={false}>
+          <MountainIcon className="h-8 w-8" />
+          <span className="sr-only">Acme Inc</span>
+        </Link>
       </header>
       <div className="container px-4 py-12 text-center md:px-6 lg:py-24">
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
