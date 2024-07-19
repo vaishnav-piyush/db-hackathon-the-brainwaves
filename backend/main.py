@@ -52,5 +52,13 @@ def upload():
 
     return jsonify({"success": True, "filename": audio.filename, "answer": response}), 200
 
+# @app.route('/careplan', methods=['GET'])
+# def careplan():
+#     question = "Based on this patient data, can you give me a personalised careplan? Can you format the response as a Json with two attributes 'Nutrition' and ''"
+#     cache['data'] = cache['data'] + "\\n" + question
+#     response = chat_with_openai(cache['data'])
+#     print(response)
+#     return jsonify({"success": True, "careplan": response}), 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
