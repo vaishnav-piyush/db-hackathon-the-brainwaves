@@ -30,7 +30,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import MyImage from '/Users/rhiannonmorris-todd/the-brainwaves/frontend/public/CareTriangle.png';
+import { useNavigate } from 'react-router-dom';
 
 const Landing: React.FC = () => {
   // Add these state and ref declarations
@@ -47,12 +47,27 @@ const Landing: React.FC = () => {
     // Add more questions here
   ];
 
+  const navigate = useNavigate();
+
+  const useCustomNavigate = () => {
+    return (path) => {
+      window.location.href = path;
+    };
+  };
+
+  // useEffect(() => {
+  //   if (currentQuestion >= questions.length) {
+  //     // Reroute to another page when the last question is asked
+  //     window.location.href = '/dashboard.tsx';
+  //   }
+  // }, [currentQuestion]);
+
   useEffect(() => {
     if (currentQuestion >= questions.length) {
-      // Reroute to another page when the last question is asked
-      window.location.href = '/another-page';
+      // Redirect to the dashboard page when the last question is asked
+      navigate('/dashboard');
     }
-  }, [currentQuestion]);
+  }, [currentQuestion, questions.length]);
 
   // Implement the recording functions
   const startRecording = async () => {
@@ -149,8 +164,6 @@ const Landing: React.FC = () => {
     <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-[#ffedf9] text-foreground">
       <header className="absolute top-6 left-1/2 -translate-x-1/2">
         <Link href="#" prefetch={false}>
-          <img src={MyImage} />
-          <span className="sr-only">MyImage</span>
         </Link>
       </header>
       <div className="container px-4 py-12 text-center md:px-6 lg:py-24">
