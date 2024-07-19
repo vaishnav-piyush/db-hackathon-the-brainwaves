@@ -110,7 +110,7 @@ const Landing: React.FC = () => {
       const formData = new FormData();
       formData.append('audio', audioBlob, 'recorded_audio.wav');
 
-      const response = await axios.post('http://127.0.0.1:8080/upload', formData, {
+      const response = await axios.post('https://care-triangle-backend-dot-hack-team-the-brainwaves.nw.r.appspot.com/upload', formData, {
         headers: { 
           'Content-Type': 'multipart/form-data'
         },

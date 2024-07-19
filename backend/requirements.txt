@@ -1,0 +1,5 @@
+google-cloud-texttospeech
+flask
+google-cloud-speech
+google-cloud-storage
+flask-cors
