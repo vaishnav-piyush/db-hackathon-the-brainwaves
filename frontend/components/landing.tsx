@@ -30,6 +30,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import MyImage from '/Users/rhiannonmorris-todd/the-brainwaves/frontend/public/CareTriangle.png';
 
 const Landing: React.FC = () => {
   // Add these state and ref declarations
@@ -148,8 +149,8 @@ const Landing: React.FC = () => {
     <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-[#ffedf9] text-foreground">
       <header className="absolute top-6 left-1/2 -translate-x-1/2">
         <Link href="#" prefetch={false}>
-          <MountainIcon className="h-8 w-8" />
-          <span className="sr-only">Acme Inc</span>
+          <img src={MyImage} />
+          <span className="sr-only">MyImage</span>
         </Link>
       </header>
       <div className="container px-4 py-12 text-center md:px-6 lg:py-24">
