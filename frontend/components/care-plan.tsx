@@ -165,7 +165,7 @@ export function carePlan() {
   )
 }
 
-function BellIcon(props) {
+function BellIcon(props: any) {
   return (
     <svg
       {...props}
@@ -186,7 +186,7 @@ function BellIcon(props) {
 }
 
 
-function BugIcon(props) {
+function BugIcon(props: any) {
   return (
     <svg
       {...props}
@@ -216,7 +216,7 @@ function BugIcon(props) {
 }
 
 
-function GanttChartIcon(props) {
+function GanttChartIcon(props: any) {
   return (
     <svg
       {...props}
@@ -238,7 +238,7 @@ function GanttChartIcon(props) {
 }
 
 
-function GroupIcon(props) {
+function GroupIcon(props: any) {
   return (
     <svg
       {...props}
@@ -263,7 +263,7 @@ function GroupIcon(props) {
 }
 
 
-function LayoutDashboardIcon(props) {
+function LayoutDashboardIcon(props: any) {
   return (
     <svg
       {...props}
@@ -286,7 +286,7 @@ function LayoutDashboardIcon(props) {
 }
 
 
-function LogInIcon(props) {
+function LogInIcon(props: any) {
   return (
     <svg
       {...props}
@@ -308,7 +308,7 @@ function LogInIcon(props) {
 }
 
 
-function LogOutIcon(props) {
+function LogOutIcon(props: any) {
   return (
     <svg
       {...props}
@@ -330,7 +330,7 @@ function LogOutIcon(props) {
 }
 
 
-function ScalingIcon(props) {
+function ScalingIcon(props: any) {
   return (
     <svg
       {...props}
@@ -353,7 +353,7 @@ function ScalingIcon(props) {
 }
 
 
-function SettingsIcon(props) {
+function SettingsIcon(props: any) {
   return (
     <svg
       {...props}
@@ -374,7 +374,7 @@ function SettingsIcon(props) {
 }
 
 
-function XIcon(props) {
+function XIcon(props: any) {
   return (
     <svg
       {...props}

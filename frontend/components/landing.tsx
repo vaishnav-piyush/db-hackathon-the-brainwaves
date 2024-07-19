@@ -30,7 +30,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import MyImage from '/Users/rhiannonmorris-todd/the-brainwaves/frontend/public/CareTriangle.png';
+import Image from 'next/image'
 
 const Landing: React.FC = () => {
   // Add these state and ref declarations
@@ -52,7 +52,7 @@ const Landing: React.FC = () => {
       // Reroute to another page when the last question is asked
       window.location.href = '/another-page';
     }
-  }, [currentQuestion]);
+  }, [currentQuestion, questions.length]);
 
   // Implement the recording functions
   const startRecording = async () => {
@@ -116,29 +116,29 @@ const Landing: React.FC = () => {
     }
   };
 
-  const saveAudioLocally = async (audioBlob: Blob) => {
-    try {
-      // Convert Blob to File
-      const file = new File([audioBlob], 'recorded_audio.wav', { type: 'audio/wav' });
-
-      // Use the File System Access API to save the file
-      const fileHandle = await window.showSaveFilePicker({
-        suggestedName: 'recorded_audio.wav',
-        types: [{
-          description: 'WAV Audio File',
-          accept: { 'audio/wav': ['.wav'] },
-        }],
-      });
-
-      const writable = await fileHandle.createWritable();
-      await writable.write(file);
-      await writable.close();
-
-      console.log('Audio file saved successfully');
-    } catch (error) {
-      console.error('Error saving audio file:', error);
-    }
-  }
+//   const saveAudioLocally = async (audioBlob: Blob) => {
+//     try {
+//       // Convert Blob to File
+//       const file = new File([audioBlob], 'recorded_audio.wav', { type: 'audio/wav' });
+//
+//       // Use the File System Access API to save the file
+//       const fileHandle = await window.showSaveFilePicker({
+//         suggestedName: 'recorded_audio.wav',
+//         types: [{
+//           description: 'WAV Audio File',
+//           accept: { 'audio/wav': ['.wav'] },
+//         }],
+//       });
+//
+//       const writable = await fileHandle.createWritable();
+//       await writable.write(file);
+//       await writable.close();
+//
+//       console.log('Audio file saved successfully');
+//     } catch (error) {
+//       console.error('Error saving audio file:', error);
+//     }
+//   }
 
   const pa = (audioUrl: string) => {
     const audio = new Audio(audioUrl);
@@ -149,7 +149,7 @@ const Landing: React.FC = () => {
     <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-[#ffedf9] text-foreground">
       <header className="absolute top-6 left-1/2 -translate-x-1/2">
         <Link href="#" prefetch={false}>
-          <img src={MyImage} />
+          <Image src={MyImage} alt="done"/>
           <span className="sr-only">MyImage</span>
         </Link>
       </header>
@@ -158,7 +158,7 @@ const Landing: React.FC = () => {
           {questions[currentQuestion]}
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-muted-foreground md:text-xl">
-          We're here to help you navigate the challenges of caring for a loved one with dementia. Share your story and
+          We are here to help you navigate the challenges of caring for a loved one with dementia. Share your story and
           let us provide personalized support and resources.
         </p>
         <div className="mt-8 flex justify-center items-center gap-2">
@@ -174,7 +174,7 @@ const Landing: React.FC = () => {
 
 export default Landing;
 
-function MicIcon(props) {
+function MicIcon(props: any) {
   return (
     <svg
       {...props}
@@ -196,7 +196,7 @@ function MicIcon(props) {
 }
 
 
-function MountainIcon(props) {
+function MountainIcon(props: any) {
   return (
     <svg
       {...props}
@@ -216,7 +216,7 @@ function MountainIcon(props) {
 }
 
 
-function XIcon(props) {
+function XIcon(props: any) {
   return (
     <svg
       {...props}
