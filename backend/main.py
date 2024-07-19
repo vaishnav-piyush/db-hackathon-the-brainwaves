@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, request
 from google.cloud import storage
 from flask_cors import CORS
 from speech_to_text import speech_to_text, return_transcript
@@ -7,6 +7,11 @@ from openai import chat_with_openai
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
+
+@app.route("/")
+def hello_world():
+    return jsonify({"message": "Hello, tell me about your dependent with dementia"})
+
 
 # Initialize Google Cloud Storage client
 storage_client = storage.Client()
@@ -45,7 +50,7 @@ def upload():
 
     cache['data'] = cache['data'] + "\\n" + response
 
-    return jsonify({"success": True, "filename": audio.filename, "answer": cache['data']}), 200
+    return jsonify({"success": True, "filename": audio.filename, "answer": response}), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
