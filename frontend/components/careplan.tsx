@@ -14,7 +14,7 @@ export default function Careplan() {
   
     useEffect(() => {
       // Fetch data from the endpoint when the component mounts
-      fetch('http://localhost:8080/careplan')
+      fetch('https://care-triangle-backend-dot-hack-team-the-brainwaves.nw.r.appspot.com/careplan')
         .then(response => response.json())
         .then(data => setData(data))
         .catch(error => console.error('Error fetching data:', error));
@@ -64,7 +64,7 @@ export default function Careplan() {
             </div>
           </div>
           <nav className="p-4 space-y-4">
-            <Link href="#" className="flex items-center gap-2 text-gray-700 hover:text-gray-900" prefetch={false}>
+            <Link href="/dashboard" className="flex items-center gap-2 text-gray-700 hover:text-gray-900" prefetch={false}>
               <LayoutDashboardIcon className="h-6 w-6" />
               <span>Dashboard</span>
             </Link>
