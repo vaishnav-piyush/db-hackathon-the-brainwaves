@@ -3,13 +3,21 @@
 * @see https://v0.dev/t/fRKJ8glquTL
 * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
 */
+'use client'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
+import { useRouter } from 'next/router';
 
-export function dashboard() {
+export default function Dashboard() {
+  // const router = useRouter();
+
+  // const handleCareplanClick = () => {
+  //   router.push('/careplan');
+  // };
+
   return (
     <div className="flex min-h-screen">
       <aside className="w-64 p-4 bg-white border-r">
@@ -22,7 +30,7 @@ export function dashboard() {
             <LayoutDashboardIcon className="w-5 h-5 mr-2" />
             Dashboard
           </Link>
-          <Link href="#" className="flex items-center p-2 text-gray-600 rounded-md" prefetch={false}>
+          <Link href="/careplan" className="flex items-center p-2 text-gray-600 rounded-md" prefetch={false}>
             <HeartIcon className="w-5 h-5 mr-2" />
             Care Plan
           </Link>

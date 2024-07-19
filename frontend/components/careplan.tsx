@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 
-export function carePlan() {
+export default function Careplan() {
   return (
     <div className="flex min-h-screen">
       <aside className="w-64 bg-white border-r">

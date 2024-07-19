@@ -47,27 +47,12 @@ const Landing: React.FC = () => {
     // Add more questions here
   ];
 
-  const navigate = useNavigate();
-
-  const useCustomNavigate = () => {
-    return (path) => {
-      window.location.href = path;
-    };
-  };
-
-  // useEffect(() => {
-  //   if (currentQuestion >= questions.length) {
-  //     // Reroute to another page when the last question is asked
-  //     window.location.href = '/dashboard.tsx';
-  //   }
-  // }, [currentQuestion]);
-
   useEffect(() => {
     if (currentQuestion >= questions.length) {
-      // Redirect to the dashboard page when the last question is asked
-      navigate('/dashboard');
+      // Reroute to another page when the last question is asked
+      window.location.href = '/dashboard';
     }
-  }, [currentQuestion, questions.length]);
+  }, [currentQuestion]);
 
   // Implement the recording functions
   const startRecording = async () => {
