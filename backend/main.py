@@ -60,7 +60,7 @@ def upload():
 
 @app.route('/careplan', methods=['GET'])
 def careplan():
-    question = "Based on this patient data, can you give me a personalised detailed careplan? Can you format the response as a Json with two categories 'Nutrition' and 'Physical Exercise'"
+    question = "Based on this patient data, can you give me a personalised detailed careplan? Can you format the response as a Json with three categories 'Nutritional Plan', 'Exercise and Physical Exercise' and 'Additional Support Services'"
     cache['data'] = cache['data'] + "\\n" + question
     response = chat_with_openai(cache['data'])
     json_obj = extract_json(response)
