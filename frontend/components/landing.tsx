@@ -33,13 +33,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Image from 'next/image'
 
-
-// import React, { useEffect, useRef, useState } from 'react';
-// import axios from 'axios';
-// import { Link } from 'react-router-dom';
-// import { Button } from './Button'; // Assuming you have a Button component
-// import { MountainIcon, MicIcon } from './Icons'; // Assuming you have these icons
-
 const Landing: React.FC = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
@@ -51,8 +44,8 @@ const Landing: React.FC = () => {
 
   const questions = [
     'Hello, please tell me about you and your dependent with dementia',
-    'What are some challenges you face caring for your mother?',
-    'Does your mother have any special requirements in terms of lifestyle or diet?',
+    'Nice to meet you John, what are some challenges you face caring for your wife?',
+    'I am sorry to hear that, does you wife have any special requirements in terms of lifestyle or diet?',
   ];
 
   useEffect(() => {
@@ -71,7 +64,7 @@ const Landing: React.FC = () => {
 
   useEffect(() => {
     if (currentQuestion >= questions.length) {
-      window.location.href = '/dashboard';
+      window.location.href = '/waiting';
     }
   }, [currentQuestion]);
 
