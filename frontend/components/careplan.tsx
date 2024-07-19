@@ -14,7 +14,7 @@ export default function Careplan() {
   
     useEffect(() => {
       // Fetch data from the endpoint when the component mounts
-      fetch('http://8080/careplan')
+      fetch('http://localhost:8080/careplan')
         .then(response => response.json())
         .then(data => setData(data))
         .catch(error => console.error('Error fetching data:', error));
@@ -37,14 +37,18 @@ export default function Careplan() {
       }
       if (typeof content === 'object') {
         return (
-          <div className="ml-4">
+          <Accordion type="single" collapsible className="space-y-4">
             {Object.entries(content).map(([key, value]) => (
-              <div key={key} className="mb-4">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">{key}</h3>
-                {renderContent(value)}
-              </div>
+              <AccordionItem key={key} value={key} className="border border-gray-300 rounded-md bg-white shadow-sm">
+                <AccordionTrigger className="px-4 py-2 text-xl font-semibold text-gray-800 bg-gray-100 border-b border-gray-300 cursor-pointer hover:bg-gray-200">
+                  {key}
+                </AccordionTrigger>
+                <AccordionContent className="p-4">
+                  {renderContent(value)}
+                </AccordionContent>
+              </AccordionItem>
             ))}
-          </div>
+          </Accordion>
         );
       }
       return null;
