@@ -2,7 +2,7 @@ name: Deploy App Engine using gcloud
 on:
   push:
     branches:
-      - deploy_backend
+      - main
 
 jobs:
   DeployBackend:
