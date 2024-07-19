@@ -33,52 +33,44 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Image from 'next/image'
 
-
-// import React, { useEffect, useRef, useState } from 'react';
-// import axios from 'axios';
-// import { Link } from 'react-router-dom';
-// import { Button } from './Button'; // Assuming you have a Button component
-// import { MountainIcon, MicIcon } from './Icons'; // Assuming you have these icons
-
 const Landing: React.FC = () => {
+  // Add these state and ref declarations
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [apiResponse, setApiResponse] = useState<string>('');
-  const [isApiResponseReceived, setIsApiResponseReceived] = useState(false);
 
   const questions = [
-    'Hello, please tell me about you and your dependent with dementia',
-    'What are some challenges you face caring for your mother?',
-    'Does your mother have any special requirements in terms of lifestyle or diet?',
+    'Hello, tell me about yourself',
+    'What are the biggest challenges you face?',
+    'How do you manage their care?',
+    // Add more questions here
   ];
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await axios.get('https://care-triangle-backend-dot-hack-team-the-brainwaves.nw.r.appspot.com/refresh');
-        console.log('Cache refreshed successfully');
-        setIsApiResponseReceived(true); // Set to true after successful API call
-      } catch (error) {
-        console.error('Error refreshing cache:', error);
-      }
-    };
+      const fetchData = async () => {
+        try {
+          await axios.get('https://care-triangle-backend-dot-hack-team-the-brainwaves.nw.r.appspot.com/refresh');
+          console.log('Cache refreshed successfully');
+        } catch (error) {
+          console.error('Error refreshing cache:', error);
+        }
+      };
 
-    fetchData();
-  }, []);
+      fetchData();
+    }, []);
 
   useEffect(() => {
     if (currentQuestion >= questions.length) {
+      // Reroute to another page when the last question is asked
       window.location.href = '/dashboard';
     }
-  }, [currentQuestion]);
+  }, [currentQuestion, questions.length]);
 
   const startRecording = async () => {
     setApiResponse(''); // Clear previous response
-    setIsApiResponseReceived(false); // Reset the API response state
-    
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const mediaRecorder = new MediaRecorder(stream);
@@ -99,22 +91,16 @@ const Landing: React.FC = () => {
         };
       });
 
-      // mediaRecorder.onstop = async () => {
-      //   const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
-      //   setAudioBlob(audioBlob);
-      //   await sendAudioToAPI(audioBlob);
-      // };
-
       mediaRecorder.start();
       setIsRecording(true);
 
-      // Stop the recording after 5 seconds
+      // Stop the recording after 5 seconds (adjust as needed)
       setTimeout(() => {
         if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
           mediaRecorderRef.current.stop();
           setIsRecording(false);
         }
-      }, 8000);
+      }, 5000);
 
       // Wait for the API call to complete
       await apiCallComplete;
@@ -125,6 +111,17 @@ const Landing: React.FC = () => {
     } catch (error) {
       console.error('Error in recording process:', error);
       setApiResponse('Error occurred during the recording process.');
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+      // Wait a few seconds before updating the question
+      setTimeout(() => {
+        setCurrentQuestion(currentQuestion + 1);
+      }, 2000);
     }
   };
 
@@ -139,35 +136,39 @@ const Landing: React.FC = () => {
         },
       });
 
+      // Log the entire response for debugging
       console.log("Full API response:", response.data);
 
+      // Check if the response has data and an "answer" key
       if (response.data && response.data.answer) {
         console.log("API answer:", response.data.answer);
         setApiResponse(response.data.answer);
-        setIsApiResponseReceived(true); // Mark the API response as received
       } else {
         console.error("Unexpected API response format");
         setApiResponse('Unexpected response from the server.');
       }
+
+      // Return the response in case you need to use it elsewhere
+      return response.data;
+
     } catch (error) {
       console.error('Error sending audio to API:', error);
       setApiResponse('Error occurred while processing the audio.');
+      throw error; // Re-throw the error to be handled by the caller if needed
     }
   };
 
   const handleRecordClick = () => {
     if (isRecording) {
       stopRecording();
-    } else { // Prevent starting recording if API response is not received
+    } else {
       startRecording();
     }
   };
 
-  const stopRecording = () => {
-    if (mediaRecorderRef.current) {
-      mediaRecorderRef.current.stop();
-      setIsRecording(false);
-    }
+  const pa = (audioUrl: string) => {
+    const audio = new Audio(audioUrl);
+    audio.play();
   };
 
   return (
@@ -187,11 +188,7 @@ const Landing: React.FC = () => {
           let us provide personalized support and resources.
         </p>
         <div className="mt-8 flex flex-col justify-center items-center gap-4">
-          <Button 
-            onClick={handleRecordClick} 
-            variant="outline" 
-            size="lg" 
-          >
+          <Button onClick={handleRecordClick} variant="outline" size="lg" className="bg-[#06B0B9] text-primary-foreground">
             {isRecording ? 'Stop Recording' : 'Start Recording'}
             <MicIcon className="h-6 w-6" />
           </Button>

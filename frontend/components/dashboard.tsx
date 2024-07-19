@@ -13,11 +13,6 @@ import { useRouter } from 'next/router';
 import Image from 'next/image'
 
 export default function Dashboard() {
-  // const router = useRouter();
-
-  // const handleCareplanClick = () => {
-  //   router.push('/careplan');
-  // };
 
   return (
     <div className="flex min-h-screen">
