@@ -28,8 +28,9 @@ To read more about using these font, please visit the Next.js documentation:
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import MyImage from '/Users/rhiannonmorris-todd/the-brainwaves/frontend/public/CareTriangle.png';
 
 const Landing: React.FC = () => {
   // Add these state and ref declarations
@@ -37,6 +38,21 @@ const Landing: React.FC = () => {
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+
+  const questions = [
+    'Hello, tell me about yourself',
+    'What are the biggest challenges you face?',
+    'How do you manage their care?',
+    // Add more questions here
+  ];
+
+  useEffect(() => {
+    if (currentQuestion >= questions.length) {
+      // Reroute to another page when the last question is asked
+      window.location.href = '/another-page';
+    }
+  }, [currentQuestion]);
 
   // Implement the recording functions
   const startRecording = async () => {
@@ -67,6 +83,10 @@ const Landing: React.FC = () => {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
       setIsRecording(false);
+      // Wait a few seconds before updating the question
+      setTimeout(() => {
+        setCurrentQuestion(currentQuestion + 1);
+      }, 2000);
     }
   };
 
@@ -83,9 +103,16 @@ const Landing: React.FC = () => {
 
       // Assuming the API returns an audio file URL
       const responseAudioUrl = response.data.audioUrl;
-      // playResponseAudio(responseAudioUrl);
     } catch (error) {
       console.error('Error sending audio to API:', error);
+    }
+  };
+
+  const handleRecordClick = () => {
+    if (isRecording) {
+      stopRecording();
+    } else {
+      startRecording();
     }
   };
 
@@ -118,28 +145,17 @@ const Landing: React.FC = () => {
     audio.play();
   };
 
-  // Add this handler for your existing button
-  const handleRecordClick = () => {
-    if (isRecording) {
-      console.log("stopping!!");
-      stopRecording();
-    } else {
-      console.log("starting!!");
-      startRecording();
-    }
-  };
-
   return (
     <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-[#ffedf9] text-foreground">
       <header className="absolute top-6 left-1/2 -translate-x-1/2">
         <Link href="#" prefetch={false}>
-          <MountainIcon className="h-8 w-8" />
-          <span className="sr-only">Acme Inc</span>
+          <img src={MyImage} />
+          <span className="sr-only">MyImage</span>
         </Link>
       </header>
       <div className="container px-4 py-12 text-center md:px-6 lg:py-24">
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
-          Hello, tell me about your dependent with dementia
+          {questions[currentQuestion]}
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-muted-foreground md:text-xl">
           We're here to help you navigate the challenges of caring for a loved one with dementia. Share your story and
