@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { useRouter } from 'next/router';
+import Image from 'next/image'
 
 export default function Dashboard() {
   // const router = useRouter();
@@ -22,8 +23,8 @@ export default function Dashboard() {
     <div className="flex min-h-screen">
       <aside className="w-64 p-4 bg-white border-r">
         <div className="flex items-center mb-8">
-          <img src="/placeholder.svg" alt="CareTriangle" className="w-10 h-10 mr-2" />
-          <span className="text-xl font-bold">CareTriangle</span>
+          {/* <Image src="/placeholder.svg" alt="CareTriangle" className="w-10 h-10 mr-2" />
+          <span className="text-xl font-bold">CareTriangle</span> */}
         </div>
         <nav className="space-y-4">
           <Link href="#" className="flex items-center p-2 text-white bg-pink-600 rounded-md" prefetch={false}>
@@ -53,7 +54,7 @@ export default function Dashboard() {
         </nav>
         <div className="mt-8 p-4 bg-teal-100 rounded-md">
           <div className="flex items-center mb-4">
-            <img src="/placeholder.svg" alt="Talk with Eleanor" className="w-10 h-10 mr-2" />
+            <Image src="/placeholder.svg" width="10" height="10" alt="Talk with Eleanor" className="w-10 h-10 mr-2" />
             <span className="text-lg font-bold">Talk with Eleanor</span>
           </div>
           <p className="mb-4 text-gray-600">Your own personal nurse. Press to start talking or typing.</p>
@@ -176,7 +177,7 @@ export default function Dashboard() {
   )
 }
 
-function BellIcon(props) {
+function BellIcon(props: any) {
   return (
     <svg
       {...props}
@@ -197,7 +198,7 @@ function BellIcon(props) {
 }
 
 
-function CircleAlertIcon(props) {
+function CircleAlertIcon(props: any) {
   return (
     <svg
       {...props}
@@ -219,7 +220,7 @@ function CircleAlertIcon(props) {
 }
 
 
-function FileTypeIcon(props) {
+function FileTypeIcon(props:any) {
   return (
     <svg
       {...props}
@@ -243,7 +244,7 @@ function FileTypeIcon(props) {
 }
 
 
-function HeartIcon(props) {
+function HeartIcon(props: any) {
   return (
     <svg
       {...props}
@@ -263,7 +264,7 @@ function HeartIcon(props) {
 }
 
 
-function LayoutDashboardIcon(props) {
+function LayoutDashboardIcon(props: any) {
   return (
     <svg
       {...props}
@@ -286,7 +287,7 @@ function LayoutDashboardIcon(props) {
 }
 
 
-function LogOutIcon(props) {
+function LogOutIcon(props: any) {
   return (
     <svg
       {...props}
@@ -308,7 +309,7 @@ function LogOutIcon(props) {
 }
 
 
-function SettingsIcon(props) {
+function SettingsIcon(props: any) {
   return (
     <svg
       {...props}
@@ -329,7 +330,7 @@ function SettingsIcon(props) {
 }
 
 
-function SunIcon(props) {
+function SunIcon(props: any) {
   return (
     <svg
       {...props}
@@ -357,7 +358,7 @@ function SunIcon(props) {
 }
 
 
-function UsersIcon(props) {
+function UsersIcon(props: any) {
   return (
     <svg
       {...props}
@@ -380,7 +381,7 @@ function UsersIcon(props) {
 }
 
 
-function XIcon(props) {
+function XIcon(props: any) {
   return (
     <svg
       {...props}
