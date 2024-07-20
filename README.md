@@ -4,7 +4,6 @@
 > This README may be changed or overwritten by the hackathon organisers during the event.
 > If you intend to create documentation, please house it in a separate file.
 
-
 ## Contents
 
 1. [Goodbye](#goodbye)
@@ -36,18 +35,19 @@
     6. [How to I Login to Teams](#teams-support-channels)
 
 ## [Goodbye!](https://www.youtube.com/watch?v=Qy9_lfjQopU)
-On behalf of the hackathon organisers, a massive "thank you" to all participants for your enthusiasm, patience and 
+
+On behalf of the hackathon organisers, a massive "thank you" to all participants for your enthusiasm, patience and
 contributions to this year's hackathon.
-We also wish to sincerely thank our vendor partners, Google, Microsoft, Hashicorp, GitHub and RedHat, without whom we 
+We also wish to sincerely thank our vendor partners, Google, Microsoft, Hashicorp, GitHub and RedHat, without whom we
 could not offer such a rich experience.
 
 For the Cloud Platform team, this is inarguably the highlight of our working calendar.
 
-You will have **two hours from the end of the closing ceremony** to export anything from GCP that you wish to retain. 
+You will have **two hours from the end of the closing ceremony** to export anything from GCP that you wish to retain.
 After this time we will deactivate the billing link on your project and **all of your resources will instantly be torn
 down**.
 
-Your GitHub repository will remain available until the end of the day on **22nd July**. 
+Your GitHub repository will remain available until the end of the day on **22nd July**.
 If you wish to retain its contents, please clone it before this time.
 
 ## About your hackathon environment
@@ -74,75 +74,89 @@ Using the GitHub repository and the Terraform Cloud workspace are entirely optio
 > It is entirely possible to follow these instructions from a mobile device running iOS or Android.
 
 ### Register in the registration portal
-Ensure your personal email, team, location and optionally GitHub handle are correctly entered in the user registration 
+
+Ensure your personal email, team, location and optionally GitHub handle are correctly entered in the user registration
 portal (accessible from within the DB network only).
-You can update your own details. 
-This is the golden source for the configuration of the hackathon environment. 
-All registered users will get access to Azure, GCP,HCP Terraform and OpenShift, but only those that have listed a valid 
+You can update your own details.
+This is the golden source for the configuration of the hackathon environment.
+All registered users will get access to Azure, GCP,HCP Terraform and OpenShift, but only those that have listed a valid
 GitHub handle will gain access to GitHub.
 
 ### Your SSO ID
-Most of this year's tooling is connected to a central Identity Provider (IdP), Entra ID (formerly Azure Active 
-Directory). 
-Your ID in the IdP is not the personal email address that you signed up with, but rather a transformation of it. 
-To determine your ID, take the personal email you signed up with, replace the "@" with a "." and add the suffix 
-"@dbhackathon.com". 
-For example, foo@bar.com becomes foo.bar.com@db-hackathon.com. 
+
+Most of this year's tooling is connected to a central Identity Provider (IdP), Entra ID (formerly Azure Active
+Directory).
+Your ID in the IdP is not the personal email address that you signed up with, but rather a transformation of it.
+To determine your ID, take the personal email you signed up with, replace the "@" with a "." and add the suffix
+"@dbhackathon.com".
+For example, foo@bar.com becomes foo.bar.com@db-hackathon.com.
 This is the email/ID you should use when prompted for SSO login via Microsoft Entra ID.
- 
+
 ### Azure Portal
+
 Please log in using https://aka.ms/azureportal.
 Use the SSO ID described above.
-Use the initial password given in your briefing. 
-Your team  lead can remind you of it. 
-You will be prompted to change it on first login and additionally set up alternate authentication methods. 
+Use the initial password given in your briefing.
+Your team lead can remind you of it.
+You will be prompted to change it on first login and additionally set up alternate authentication methods.
 Please do so immediately.
 
 ### GCP Console
-Please log in using https://www.google.com/a/db-hackathon.com/ServiceLogin?continue=https://console.cloud.google.com. 
-Use the credentials you configured above. 
-When logged in, you should be able to see a project named after your team and a project named "hackathon-seed-2021" 
+
+Please log in using https://www.google.com/a/db-hackathon.com/ServiceLogin?continue=https://console.cloud.google.com.
+Use the credentials you configured above.
+When logged in, you should be able to see a project named after your team and a project named "hackathon-seed-2021"
 which contains a storage bucket with shared materials for your consideration.
 
 ### HCP Terraform
-Please log in using https://app.terraform.io/sso/sign-in. 
-You do not need to wait for an invitation email to attempt this. 
-Use the organisation name "db-hackathon-2024". 
-When prompted, use the credentials you configured above. 
-If you do not already have a HCP Terraform account associated with the email address you used to register for this 
-event, you will be prompted to create one and link it to the above SSO ID. 
-Alternatively, if you do already have aGCP Terraform account, follow the option to "Link to existing HCP Terraform 
-account". 
+
+Please log in using https://app.terraform.io/sso/sign-in.
+You do not need to wait for an invitation email to attempt this.
+Use the organisation name "db-hackathon-2024".
+When prompted, use the credentials you configured above.
+If you do not already have a HCP Terraform account associated with the email address you used to register for this
+event, you will be prompted to create one and link it to the above SSO ID.
+Alternatively, if you do already have aGCP Terraform account, follow the option to "Link to existing HCP Terraform
+account".
 When you log in, you should be able to see a workspace named after your team.
 
 ### GitHub
-Only participants who registered with a GitHub handle will be invited to the organisation. 
-These participants will receive an email at their registered personal email address with a convenient direct link to 
-accept the invitation. 
-When prompted, sign-in using the GitHub handle you registered with. 
-When prompted for SSO authentication, use the ID configured above. 
-Once logged in, you will need to accept the invitation to the organisation "db-hackathon". 
+
+Only participants who registered with a GitHub handle will be invited to the organisation.
+These participants will receive an email at their registered personal email address with a convenient direct link to
+accept the invitation.
+When prompted, sign-in using the GitHub handle you registered with.
+When prompted for SSO authentication, use the ID configured above.
+Once logged in, you will need to accept the invitation to the organisation "db-hackathon".
 
 > [!NOTE]
-> Some users report that they need to re-open the link from the email after the first GitHub and SSO log-in in order to 
-> see the invitation. 
+> Some users report that they need to re-open the link from the email after the first GitHub and SSO log-in in order to
+> see the invitation.
 
-In that organisation you will have a repository named after your team. You may not see the repository when you first log-in. Try again after one hour.
+In that organisation you will have a repository named after your team. You may not see the repository when you first
+log-in. Try again after one hour.
 
 ### Microsoft Teams
-Use your SSO ID to log in. You can access teams via a browser (https://teams.microsoft.com/v2/) or the 
-[desktop app](https://www.microsoft.com/en-gb/microsoft-teams/download-app). 
+
+Use your SSO ID to log in. You can access teams via a browser (https://teams.microsoft.com/v2/) or the
+[desktop app](https://www.microsoft.com/en-gb/microsoft-teams/download-app).
 
 > [!NOTE]
-> Early feedback is that the desktop app is notably better for video calls and screen sharing, but all other facilities 
+> Early feedback is that the desktop app is notably better for video calls and screen sharing, but all other facilities
 > are equal.
 
 ### Getting Help
+
 If you have difficulty with any of these steps:
-* Prior to the event, you can seek help inside the DB network on a best-efforts basis in the DB Teams channel advertised in your briefing.
-* During the event: 
-  * Preferably please raise an issue in the [Support repo](https://github.com/db-hackathon/support/issues/new/choose), or ask a colleague to do so on your behalf.
-  * Alternatively, raise it in the event [MS Teams tenant's support channel](https://teams.microsoft.com/l/team/19%3AanjLDL718QMHaZCH0sDgW6dz-Cl8Kcgb8EJvNVVqvo41%40thread.tacv2/conversations?groupId=7c337606-8e36-414f-946e-09ac1161aca5&tenantId=a8f249fb-91ee-4dd5-bf60-d1ec1330b078), or ask a colleague to do so on your behalf.
+
+* Prior to the event, you can seek help inside the DB network on a best-efforts basis in the DB Teams channel advertised
+  in your briefing.
+* During the event:
+    * Preferably please raise an issue in the [Support repo](https://github.com/db-hackathon/support/issues/new/choose),
+      or ask a colleague to do so on your behalf.
+    * Alternatively, raise it in the
+      event [MS Teams tenant's support channel](https://teams.microsoft.com/l/team/19%3AanjLDL718QMHaZCH0sDgW6dz-Cl8Kcgb8EJvNVVqvo41%40thread.tacv2/conversations?groupId=7c337606-8e36-414f-946e-09ac1161aca5&tenantId=a8f249fb-91ee-4dd5-bf60-d1ec1330b078),
+      or ask a colleague to do so on your behalf.
 
 ## [GCP](https://console.cloud.google.com/home/dashboard?project=hack-team-the-brainwaves)
 
@@ -351,8 +365,13 @@ Examples:
     * [Terraform - Standard](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/app_engine_standard_app_version#service_account)
 * Cloud Build
     * [gcloud](https://cloud.google.com/build/docs/securing-builds/configure-user-specified-service-accounts)
-      * Ensure you specify the [--service-account=workload@hack-team-the-brainwaves.iam.gserviceaccount.com](https://cloud.google.com/sdk/gcloud/reference/builds/submit#--service-account) parameter of `gcloud builds submit`
-      * And additional specify the [--config=...](https://cloud.google.com/sdk/gcloud/reference/builds/submit#--config) parameter where you set the logging option [CLOUD_LOGGING_ONLY](https://cloud.google.com/build/docs/securing-builds/store-manage-build-logs#store-logs).
+        * Ensure you specify
+          the [--service-account=workload@hack-team-the-brainwaves.iam.gserviceaccount.com](https://cloud.google.com/sdk/gcloud/reference/builds/submit#--service-account)
+          parameter of `gcloud builds submit`
+        * And additional specify
+          the [--config=...](https://cloud.google.com/sdk/gcloud/reference/builds/submit#--config) parameter where you
+          set the logging
+          option [CLOUD_LOGGING_ONLY](https://cloud.google.com/build/docs/securing-builds/store-manage-build-logs#store-logs).
     * [Terraform](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloudbuild_trigger#service_account_email)
 * Cloud Composer
     * [Console](https://cloud.google.com/composer/docs/how-to/managing/creating#console)
@@ -482,7 +501,9 @@ Simply run the following commands to Auth your cloud shell against your Google C
 #### DBHack Chatbot
 
 This is a sample applicaiton that has been developer by Google PSO (Hans-Christian Fuchs) for use in the DB Hackathon
+
 2024.
+
 It Gives you a sample Chat Bot applicaton written in Python using Streemlit.
 It harnesses Gemini and RAG and can be tailored to your needs during the hackathon.
 The example code is available [here](https://github.com/db-hackathon/support/tree/main/google-examples).
@@ -493,11 +514,16 @@ The example code is available [here](https://github.com/db-hackathon/support/tre
 ## [GitHub](https://github.com/db-hackathon/the-brainwaves)
 
 ### Initial Login
-Only participants who registered with a Github handle will be invited to the organisation, also anyone who registered with an invalid Github handle will have been rejected and no account created.
 
-Participants shoudl recieve an email with a link to accept the invitation to their project, please check you spam if you are missing the email.
+Only participants who registered with a Github handle will be invited to the organisation, also anyone who registered
+with an invalid Github handle will have been rejected and no account created.
 
-When prompted, login using the Github handle you registered with.  When prompted for SSO authentication, use your hackathon ID.  You should then be prompted to accept the invitation to the 'db-hackathon' organisation (some users report needing to reopen the link to see the invite once signed in).
+Participants shoudl recieve an email with a link to accept the invitation to their project, please check you spam if you
+are missing the email.
+
+When prompted, login using the Github handle you registered with. When prompted for SSO authentication, use your
+hackathon ID. You should then be prompted to accept the invitation to the 'db-hackathon' organisation (some users report
+needing to reopen the link to see the invite once signed in).
 
 ### Usage
 
@@ -533,11 +559,15 @@ All Github users have access to Github Copilot, for more details look [here](#gi
 ## [Terraform Cloud](https://app.terraform.io/app/db-hackathon-2024/workspaces/hack-team-the-brainwaves)
 
 ### Initial Login
-Please login using [sso sign in](https://app.terraform.io/sso/sign-in).  You do not need to wait for an invitation email to attempt this.
 
-Use the organisation name *db-hackathon-2024* 
+Please login using [sso sign in](https://app.terraform.io/sso/sign-in). You do not need to wait for an invitation email
+to attempt this.
 
-If you do not already have a HCP Terraform account associated with the email you used to register for this event, you will be prompted to create an account and link it to your Hackathon ID. Alternatively if you do, follow the option to *link to existing HCP Terraform Account* or login with Github account if this uses the same email account.
+Use the organisation name *db-hackathon-2024*
+
+If you do not already have a HCP Terraform account associated with the email you used to register for this event, you
+will be prompted to create an account and link it to your Hackathon ID. Alternatively if you do, follow the option to
+*link to existing HCP Terraform Account* or login with Github account if this uses the same email account.
 
 ### Usage
 
@@ -570,7 +600,9 @@ Two OpenShift environments are available for the hackathon event. Clusters are a
 
 [OpenShift on Azure](https://console-openshift-console.apps.hackathon.uksouth.aroapp.io)
 
-Detailed information about accessing the OpenShift environment and how to deploy the Generative AI application on OpenShift is available [here](https://db-hack-guidance-redhat2024.apps.hackathon.uksouth.aroapp.io/db-hack-rh/4.15/index.html).
+Detailed information about accessing the OpenShift environment and how to deploy the Generative AI application on
+OpenShift is
+available [here](https://db-hack-guidance-redhat2024.apps.hackathon.uksouth.aroapp.io/db-hack-rh/4.15/index.html).
 
 No SSL cert has been provisioned, so you'll have to risk the warnings.
 On that page, choose to "Log in with" the "githubidp" option and use the GitHub handle you signed up with to complete
@@ -589,8 +621,10 @@ When it detects an expired token, simply access the Kubernetes secret again to g
 ## Azure
 
 Log in using your SSO ID. Each team has a Resource Group in which they have broad administrative access.
-Training materials are available [here](https://dbaihackathon2024outlook.sharepoint.com/sites/HakathonTraining/SitePages/TrainingHome.aspx).
-A user guide is available [here](https://storage.cloud.google.com/hackathon_shared_storage/Hackathon2024AzureUserGuide.docx).
+Training materials are
+available [here](https://dbaihackathon2024outlook.sharepoint.com/sites/HakathonTraining/SitePages/TrainingHome.aspx).
+A user guide is
+available [here](https://storage.cloud.google.com/hackathon_shared_storage/Hackathon2024AzureUserGuide.docx).
 
 ## [MS Teams](https://teams.microsoft.com/v2/)
 
@@ -708,28 +742,29 @@ your Workload SA.
 
 ### How do I deploy Cloud Run?
 
-You can find a [GitHub Actions example here](./.github/workflows/example_deploy_cloud_run_action.yml), 
-a [gcloud example here](./.github/workflows/example_deploy_cloud_run_gcloud.yml),
+There are examples in this repository!
+You can find a [gcloud example here](./.github/workflows/example_deploy_cloud_run_gcloud.yml),
 and a [Terraform example here](./terraform/example_cloud_run.tf).
 
 ### How do I deploy App Engine?
 
-You can find a [GitHub Actions example here](./.github/workflows/example_deploy_app_engine_action.yml),
-a [gcloud example here](./.github/workflows/example_deploy_app_engine_gcloud.yml)
+There are examples in this repository!
+You can find a [gcloud example here](./.github/workflows/example_deploy_app_engine_gcloud.yml)
 and a [Terraform example here](./terraform/example_app_engine.tf).
 
 ### How do I deploy Cloud Functions?
 
-You can find a [GitHub Actions example here](./.github/workflows/example_deploy_cloud_function_action.yml),
-a [gcloud example here](./.github/workflows/example_deploy_cloud_function_gcloud.yml)
+There are examples in this repository!
+You can find a [gcloud example here](./.github/workflows/example_deploy_cloud_function_gcloud.yml)
 and a [Terraform example here](./terraform/example_cloud_functions.tf).
 
 ### How do I build an image with Cloud Build?
+
 See the section ["Use a custom user-managed SA"](#use-a-customuser-managed-service-account-wherever-possible) above.
-You'll likely end up with something like:
+When using a Dockerfile, you'll likely end up with something like:
+
 ```bash
-gcloud builds submit --tag "$GCP_REGION-docker.pkg.\
-  dev/$GCP_PROJECT/my_repo/my_service" \
+gcloud builds submit --tag "$GCP_REGION-docker.pkg.dev/$GCP_PROJECT/my_service" \
   --service-account="projects/$GCP_PROJECT/serviceAccounts/$WORKLOAD_SA_EMAIL" \
   --default-buckets-behavior=regional-user-owned-bucket
 ```
